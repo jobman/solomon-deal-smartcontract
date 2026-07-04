@@ -1,6 +1,6 @@
-import "@acton/emulation/testing"
 import "@acton/io"
 
+import "@acton/emulation/testing"
 import "@contracts/types"
 import "@wrappers/SolomonDeal.gen"
 

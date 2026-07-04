@@ -1,6 +1,6 @@
-import "@acton/emulation/network"
 import "@acton/env"
 import "@acton/io"
+import "@acton/emulation/network"
 import "@acton/testing/assert"
 
 import "@wrappers/SolomonDeal.gen"

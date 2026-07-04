@@ -1,7 +1,7 @@
-import "@acton/emulation/network"
-import "@acton/emulation/testing"
 import "@acton/env"
 import "@acton/io"
+import "@acton/emulation/network"
+import "@acton/emulation/testing"
 import "@acton/testing/assert"
 import "@acton/testing/expect"
 
@@ -47,11 +47,25 @@ fun main(
     );
 
     if (scenario == SCENARIO_COMPLETE_WITH_RESPONSIBILITY) {
-        runCompleteWithResponsibility(contract, consumer.address, producer.address, dealId, amount, responsibility);
+        runCompleteWithResponsibility(
+            contract,
+            consumer.address,
+            producer.address,
+            dealId,
+            amount,
+            responsibility,
+        );
     } else if (scenario == SCENARIO_COMPLETE_WITHOUT_RESPONSIBILITY) {
         runCompleteWithoutResponsibility(contract, consumer.address, producer.address, amount);
     } else if (scenario == SCENARIO_PRODUCER_GIVE_UP_WITH_RESPONSIBILITY) {
-        runProducerGiveUpWithResponsibility(contract, consumer.address, producer.address, dealId, amount, responsibility);
+        runProducerGiveUpWithResponsibility(
+            contract,
+            consumer.address,
+            producer.address,
+            dealId,
+            amount,
+            responsibility,
+        );
     } else if (scenario == SCENARIO_REFUND_NO_RESPONSIBILITY) {
         runRefundNoResponsibility(contract, consumer.address, amount);
     } else if (scenario == SCENARIO_JUDGE_CONSUMER_RIGHT) {
@@ -118,7 +132,11 @@ fun runCompleteWithResponsibility(
     sendPayResponsibilityAndAssert(contract, producer, dealId, amount, responsibility);
 
     val producerBefore = testing.getAccountBalance(producer);
-    val completeRes = contract.sendAny(consumer, requireCellEnv("COMPLETE_BODY"), { value: GAS_VALUE });
+    val completeRes = contract.sendAny(
+        consumer,
+        requireCellEnv("COMPLETE_BODY"),
+        { value: GAS_VALUE },
+    );
     expect(completeRes).toHaveSuccessfulTx<CompleteTheDeal>({
         from: consumer,
         to: contract.address,
@@ -135,7 +153,11 @@ fun runCompleteWithoutResponsibility(
     amount: coins,
 ) {
     val producerBefore = testing.getAccountBalance(producer);
-    val completeRes = contract.sendAny(consumer, requireCellEnv("COMPLETE_BODY"), { value: GAS_VALUE });
+    val completeRes = contract.sendAny(
+        consumer,
+        requireCellEnv("COMPLETE_BODY"),
+        { value: GAS_VALUE },
+    );
     expect(completeRes).toHaveSuccessfulTx<CompleteTheDeal>({
         from: consumer,
         to: contract.address,
@@ -156,7 +178,11 @@ fun runProducerGiveUpWithResponsibility(
     sendPayResponsibilityAndAssert(contract, producer, dealId, amount, responsibility);
 
     val consumerBefore = testing.getAccountBalance(consumer);
-    val giveUpRes = contract.sendAny(producer, requireCellEnv("GIVE_UP_BODY"), { value: GAS_VALUE });
+    val giveUpRes = contract.sendAny(
+        producer,
+        requireCellEnv("GIVE_UP_BODY"),
+        { value: GAS_VALUE },
+    );
     expect(giveUpRes).toHaveSuccessfulTx<ProducerGiveUpDeal>({
         from: producer,
         to: contract.address,
