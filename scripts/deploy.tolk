@@ -11,7 +11,7 @@ fun main(id: uint32 = 0) {
     val contract = SolomonDeal.fromStorage({
         id,
         judgeSystem: deployer.address,
-        minimalDealAmount: ton("0.1"),
+        minimalDealAmount: ton("1"),
         feePart: 50,
         feeFund: 0,
         systemFailureFreezeTime: 864_000,

@@ -261,7 +261,7 @@ fun defaultStorage(id: uint32, judge: address): Storage {
     return {
         id,
         judgeSystem: judge,
-        minimalDealAmount: ton("0.1"),
+        minimalDealAmount: ton("1"),
         feePart: 50,
         feeFund: 0,
         systemFailureFreezeTime: 864_000,
